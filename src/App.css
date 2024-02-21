@@ -1,3 +1,16 @@
-.App{
-  text-align: center;
+
+.card img{
+  height: 550px!important;
+  border-radius: 50px;
+ 
+}
+body {
+  background: url("../src/assests/images/background.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
 }
