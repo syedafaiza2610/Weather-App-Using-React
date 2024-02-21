@@ -102,14 +102,14 @@ function SearchWeather() {
                                 </form>
                                 <div className="bg-dark bg-opacity-50 py-3 ">
                                     <h2 className="card-title">{data.name}</h2>
-                                    <h4 className="card-text lead "> {day}, {month} {date}, {year}</h4>
-                                    <br>
-                                    </br>
+                                    <h4 className="card-text lead"> {day}, {month} {date}, {year}</h4>
+                                    <br/>
                                     {time}
                                     <hr />
                                     <i className={`fas ${emoji} fa-4x`}></i>
                                     <h1 className="fw-bolder mb-5">{temperature} &deg;C</h1>
-                                    <p className="lead fw-bolder mb-0">{data.weather[0].main}</p>
+                                    <h3 className="lead fw-bolder mb-0">{data.weather[0].main}</h3>
+                                    <br></br>
                                     <p className="lead">{temperature_min} &deg;C | {temperature_max} &deg;C</p>
 
                                 </div>
