@@ -47,7 +47,7 @@ export default App
 //       <button type="button" onClick={handleSearch}>Search</button></div>
 //       {<h1> {result.main && result.main.temp}<sup>'</sup>F</h1> }
 //       <h1>{result.main && result.main.humidity}<sup>'</sup>F</h1> 
-//        <h1>{result.weather[0].description}</h1>  
+//        {/* <h1>{result.weather[0].description}</h1>   */}
 //        <h1>{result.name}</h1> 
      
      

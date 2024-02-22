@@ -9,24 +9,23 @@ function SearchWeather() {
     const [search, setsearch] = useState("Karachi")
     const [data, setdata] = useState([])
     const [Input, setInput] = useState("")
-    let temperature = (data.main.temp - 273.15).toFixed(2);
-    let temperature_min = (data.main.temp_min - 273.15).toFixed(2);
-    let temperature_max = (data.main.temp_max - 273.15).toFixed(2);
-
-    useEffect(() => {
-        const fetchWeather = async () => {
+    let componentMounted = true;
+    useEffect(() =>{
+        const fetchWeather = async () =>{
             const response = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=1d7d012881cd8ccf1947aaa2e1e30d5a`)
-                .then(res => res.json())
-                .then(data => {
-                    console.log(data)
-                    setdata(data)
-                })
+            if(componentMounted){
+                setdata(await response.json());
+                console.log(data)
+            }
+            return() => {
+                componentMounted = false;
+            }
+        
+        
         }
 
-        fetchWeather();
-    }, [])
-
-
+      fetchWeather();
+    },[search])
     let d = new Date();
     let date = d.getDate();
     let year = d.getFullYear();
@@ -42,7 +41,6 @@ function SearchWeather() {
     const handleSubmit = (event) => {
         event.preventDefault();
         setsearch(Input);
-        console.log(Input)
     }
 
 
@@ -68,7 +66,7 @@ function SearchWeather() {
             emoji = "fa-smog"
         }
     }
-    else {
+         else {
         return (
             <div class="d-flex justify-content-center">
                 <div class="spinner-border" role="status">
@@ -77,6 +75,9 @@ function SearchWeather() {
             </div>
         )
     }
+    let temperature = (data.main.temp - 273.15).toFixed(2);
+    let temperature_min = (data.main.temp_min - 273.15).toFixed(2);
+    let temperature_max = (data.main.temp_max - 273.15).toFixed(2);
     return (
         <div>
             <div className="container mt-5">
@@ -97,20 +98,21 @@ function SearchWeather() {
                                             required
 
                                             aria-describedby="basic-addon2" />
-                                        <button type="submit" class="input-group-text" id="basic-addon2"><i className="fas fa-search"></i></button>
+                                        <button onClick={handleSubmit} type="submit" class="input-group-text" id="basic-addon2"><i className="fas fa-search"></i></button>
                                     </div>
                                 </form>
                                 <div className="bg-dark bg-opacity-50 py-3 ">
                                     <h2 className="card-title">{data.name}</h2>
                                     <h4 className="card-text lead"> {day}, {month} {date}, {year}</h4>
-                                    <br/>
+                                    <br />
                                     {time}
                                     <hr />
                                     <i className={`fas ${emoji} fa-4x`}></i>
                                     <h1 className="fw-bolder mb-5">{temperature} &deg;C</h1>
                                     <h3 className="lead fw-bolder mb-0">{data.weather[0].main}</h3>
                                     <br></br>
-                                    <p className="lead">{temperature_min} &deg;C | {temperature_max} &deg;C</p>
+                                    <p className="lead">{temperature_max} &deg;C | {temperature_min} &deg;C</p>
+                                   
 
                                 </div>
                             </div>
